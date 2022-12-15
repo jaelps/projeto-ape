@@ -63,16 +63,8 @@ while optionInicio != '3' or optionInicio == 'exit':
                         verificadorLogin_v =  str(tabela['Login'])
                         verificadorSenha_v = str(tabela['Senha'])
                         verificadorNome_v = str(tabela['Nome'])
-                
-                        verificadoArquivo = '/projeto-ape/' + log_entrada + '.csv'
+        
 
-                        arqExiste =  os.path.isfile(verificadoArquivo)
-                        
-                        if arqExiste == False:
-                                novaAgenda = log_entrada + '.csv'
-
-                                with open(novaAgenda, "w") as dado:
-                                        dado.write('Nome,Numero')
 
                         if log_entrada not in verificadorLogin_v and password_entrada not in verificadorSenha_v: #teste validade login
                                 print('Usuario não identificado')
@@ -81,65 +73,7 @@ while optionInicio != '3' or optionInicio == 'exit':
                         elif log_entrada in verificadorLogin_v and password_entrada in verificadorSenha_v:
                                         continue
 
-                                        '''
-                                        print(
-                                        ========================== [ @gend@ ] ========================
-                                        ||                                                           ||
-                                        ||                  [ 1 ] Adicionar Contato                  ||
-                                        ||                  [ 2 ] Listar Contatos                    ||
-                                        ||                  [ 3 ] Pesquisar Contato                  ||
-                                        ||                  [ 4 ] Remover Contato                    ||
-                                        ||                  [ 5 ] Alterar Contato                    ||
-                                        ||                  [ 6 ] Exluir Contato do Usuário          ||
-                                        ||                  [ 7 ] Sair                               ||
-                                        ||                                                           ||
-                                        ===============================================================
-                                        )
-                                        optionSecundario = int(input('Digite a opção desejada: '))
-
-                                        while optionSecundario != 7:
-
-                                                if optionSecundario == 1:
-                                                        while noC != 'n':
-
-                                                                print('\n--------[ Novo contato ]-----------')
-                                                                                                        
-                                                                nomeContato = str(input('Nome Contato: ')).strip().lower()
-
-                                                                numeroContato = str(input('Numero Telefone: ')).strip().lower()
-                                                                digitosN = len(numeroContato)
-
-                                                                if numeroContato not in '1234567890' and digitosN != 11:
-                                                                                                        print('\n[ Erro é necessario 11 digitos numericos ]\n')
-                                                                                                        
-                                                                verificadoArquivo = '/projeto-ape/' + log_entrada + '.csv'
-                                                                                                
-                                                                novoContato = (f'\n{nomeContato},{numeroContato},')
-
-                                                                novaAgenda = log_entrada + '.csv'
-
-                                                                with open(novaAgenda, "a", encoding='utf-8') as dado:
-                                                                                dado.write(novoContato)
-
-
-
-                                                                print('[ Novo contato foi adicionado ]')
-                                                                print('[ Deseja adnicionar novo contato ]')
-                                                                print('Sim s/n Não')
-
-                                                                noC = str(input('Opção: '))
-                                                                
-                                                elif optionSecundario == 2:
-
-                                                        tabela = pandas.read_csv(novaAgenda)
-                                                                #elif optionSecundario == 3:
-                                                                        #elif optionSecundario == 4:
-                                                                        #elif optionSecundario == 5:
-                                                                        #elif optionSecundario == 6:
-                                                elif optionSecundario == 7:
-                                                                break
-                                                else:
-                                                        print('Opção invalida')'''
+                                        # <<<<<<  Incluir Menu 2 >>>>>>>
 
                                
          #----------------------- Inicio =  Opção 2 ---------------------------#       
@@ -197,6 +131,14 @@ while optionInicio != '3' or optionInicio == 'exit':
 
                                 with open('tabelabd.csv', "a") as dadoEntrada:
                                         dadoEntrada.write(novo_perfil)
+
+                                
+                                novaAgenda = log + '.csv'
+
+                                with open(novaAgenda, "w") as dado:
+                                        dado.write('Nome,Numero')
+
+                                
                                 
                                 print('\n\n[ O cadastro foi efetuado com sucesso ]\n')
 
@@ -243,68 +185,5 @@ while optionInicio != '3' or optionInicio == 'exit':
                 print('Opção invalida')
 
 
-                
 
-        #------------------------- Opção invalida ---------------------------#
-'''
-print(
-         ========================== [ @gend@ ] ========================
-        ||                                                           ||
-        ||                  [ 1 ] Adicionar Contato                  ||
-        ||                  [ 2 ] Listar Contatos                    ||
-        ||                  [ 3 ] Pesquisar Contato                  ||
-        ||                  [ 4 ] Remover Contato                    ||
-        ||                  [ 5 ] Alterar Contato                    ||
-        ||                  [ 6 ] Exluir Contato do Usuário          ||
-        ||                  [ 7 ] Sair                               ||
-        ||                                                           ||
-        ===============================================================
-        )
-optionSecundario = int(input('Digite a opção desejada: '))
-
-while optionSecundario != 7:
-
-        if optionSecundario == 1:
-                while noC != 'n':
-
-                        print('\n--------[ Novo contato ]-----------')
-                                                                                                        
-                        nomeContato = str(input('Nome Contato: ')).strip().lower()
-
-                        numeroContato = str(input('Numero Telefone: ')).strip().lower()
-                        digitosN = len(numeroContato)
-
-                        if numeroContato not in '1234567890' and digitosN != 11:
-                                        print('\n[ Erro é necessario 11 digitos numericos ]\n')
-                                                                                                        
-                        verificadoArquivo = '/projeto-ape/' + log_entrada + '.csv'
-                                                                                                
-                        novoContato = (f'\n{nomeContato},{numeroContato},')
-
-                        novaAgenda = log_entrada + '.csv'
-
-                        with open(novaAgenda, "a", encoding='utf-8') as dado:
-                                dado.write(novoContato)
-
-
-
-                        print('[ Novo contato foi adicionado ]')
-                        print('[ Deseja adnicionar novo contato ]')
-                        print('Sim s/n Não')
-
-                        noC = str(input('Opção: '))
-                                                                
-        elif optionSecundario == 2:
-
-                tabela = pandas.read_csv(novaAgenda)
-                #elif optionSecundario == 3:
-                #elif optionSecundario == 4:
-                #elif optionSecundario == 5:
-                #elif optionSecundario == 6:
-        elif optionSecundario == 7:
-                break
-        else:
-                print('Opção invalida')'''
-
-
-   
+#------------------------- Opção invalida ---------------------------#

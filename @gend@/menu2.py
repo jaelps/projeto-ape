@@ -51,7 +51,8 @@ while optionSecundario != 7:
                 print(tabela)
         
 
-        elif optionSecundario == 3:
+        elif optionSecundario == 3:# ainda em processo
+                
                 tabela = pandas.read_csv('text.csv')  # abertura de arquivo para leitura conforme o guia 
                 
                                 
