@@ -106,9 +106,9 @@ while optionInicio != '3' or optionInicio == 'exit':
                         test_password = (password).isalnum()
                         cont2 = len(password)
 
-                        if cont2 != 8 or test_password == False:  #Teste para quantidade de caracteres senha
+                        if cont2 != 6 or test_password == False:  #Teste para quantidade de caracteres senha
 
-                                print('[ Senha deve ter 8 caracteris entre numeros e letras ]\n')
+                                print('[ Senha deve ter 6 caracteris entre numeros e letras ]\n')
                                 password = input('senha: ').strip().lower()
 
                         

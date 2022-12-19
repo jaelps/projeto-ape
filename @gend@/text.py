@@ -65,9 +65,10 @@ verificador = str(dadosClient)
 valor = ast.literal_eval(consulta)
 print(type(valor))'''
 
-verificadoArquivo = '83988888449.csv'
+tabela = pandas.read_csv('text.csv')
 
-if os.path.isfile(verificadoArquivo):
-         respost = True
+procura = str(input('Procura: '))
 
-         print(respost)
+tabela2 = pandas.DataFrame(tabela)
+
+print (tabela2.loc[(tabela2['Nome'] == procura)])

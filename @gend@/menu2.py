@@ -1,5 +1,5 @@
 import pandas
-import numpy
+from time import sleep
 
 
 optionSecundario = ''
@@ -19,6 +19,7 @@ while optionSecundario != 7:
         ''')
         optionSecundario = int(input('Digite a opção desejada: '))
 
+        #-------------- [ Inicio - Opção 1 - adicinar contato ] ----------------#
         if optionSecundario == 1:
                 print('\n--------[ Novo contato ]-----------')
                 nomeContato = str(input('Nome Contato: ')).strip().lower()
@@ -45,31 +46,36 @@ while optionSecundario != 7:
                 print('Sim s/n Não')
 
                 noC = str(input('Opção: '))
-                                                                
-        elif optionSecundario == 2:
-                tabela = pandas.read_csv('text.csv')
-                print(tabela)
-        
+        #----------------- [ Fim - Opção 1 ] ---------------#
 
+        #----------- [ Inicio - Opção 2 - Mostrar contato ] ----#                                            
+        elif optionSecundario == 2:
+                tabela = pandas.read_csv(novaAgenda)
+                print(tabela)
+                sleep(1)
+        #---------    [   Fim - Opção 2    ]     ----------#
+
+
+        #-----   [   Inicio - Opção 3 - Pesquisa contato   ]      ----#
         elif optionSecundario == 3:# ainda em processo
                 
-                tabela = pandas.read_csv('text.csv')  # abertura de arquivo para leitura conforme o guia 
-                
-                                
-                #contato =  str(tabela['Nome'])
+                tabela = pandas.read_csv(novaAgenda)
+
+                pesquisa = str(input('Favor informar nome contato: '))
+
+                tabela2 = pandas.DataFrame(tabela)
+
+                print (tabela2.loc[(tabela2['Nome'] == pesquisa)])
+                sleep(1)
                 
 
-                pesquisa = str(input('Pesquisar contato: '))
-                #verifi = contato.count(pesquisa)
-                
+        #-----  [   Fim - Opção 3    ]      -----#
 
-                #print(contato)
-                #print(pesquisa)
-                #print(verifi)
-                
+
+        #-----  [   Inicio - Opção 4 - excluir contato    ]      -----#
         elif optionSecundario == 4:
                 
-                data = pandas.read_csv("text.csv")
+                data = pandas.read_csv(novaAgenda)
                 print(data)
                 delete = int(input('Pesquisar contato: '))
                 result = data.drop(delete)
@@ -79,9 +85,13 @@ while optionSecundario != 7:
                 #novaAgenda = log_entrada + '.csv'
                 with open('text.csv', "w", encoding='utf-8') as dado:
                         dado.write(result)
+                sleep(1)
 
+        #-----  [   Fim - Opção 4    ]      -----#
+
+        #-----  [   Inicio - Opção 5 - Alterar contato    ] ------#
         elif optionSecundario == 5:
-                data = pandas.read_csv("text.csv")
+                data = pandas.read_csv(novaAgenda)
                 print(data)
                 alterar = int(input('Digite a linha do constato a ser alterado:  '))
                 nome = str(input('Nome:  '))
@@ -93,9 +103,26 @@ while optionSecundario != 7:
 
                 with open('text.csv', "w", encoding='utf-8') as dado:
                         dado.write(altrado)
+                sleep(1)
+        #-----  [    Fim - Opção 5   ]      -----#
 
-        #elif optionSecundario == 6:
+        #-----  [    Inicio - Opção 6  - Excluir Conta ]      -----#
+        elif optionSecundario == 6:
+
+                tabela = pandas.read_csv('tabelabd.csv')
+
+                tabela2 = pandas.DataFrame(tabela)
+
+                itemExcluir = tabela2.index[(tabela2['Login'] == log_entrada)].tolist()
+                sepandoItens = itemExcluir[0]
+                excluindoConta = tabela2.drop(sepandoItens)
+                excluindoConta = excluindoConta
+                print(excluindoConta)
+        #-----  [    Fim - Opção 6   ]      -----#
+
+        #-----  [    Inicio - Opção 7 - Sair   ]      -----#
         elif optionSecundario == 7:
                 break
+        #-----  [    Fim - Opção 7   ]      -----#
         else:
                 print('Opção invalida')
