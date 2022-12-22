@@ -1,5 +1,6 @@
 import pandas
 from time import sleep
+import sys
 
 
 
@@ -30,17 +31,17 @@ def acessoMenuPrincipal():
 
                     if contadorNsenha != 6 or test_senha == False:
                             print('[ A senha deve ter 6 caracteres entre numeros e letras ]\n')
-                            senha_entrada = str(input('Senha: ')).strip().lower()
+                            password_entrada = str(input('Senha: ')).strip().lower()
 
 
 
-                    tabela = pandas.read_csv('tabelabd.csv')  # abertura de arquivo para leitura conforme o guia 
-                                                
+                    tabela = pandas.read_csv('cadastroraiz.csv')  # abertura de arquivo para leitura conforme o guia 
 
+                    
                     verificadorLogin_v =  str(tabela['Login'])
                     verificadorSenha_v = str(tabela['Senha'])
-                    verificadorNome_v = str(tabela['Nome'])
-                        
+
+ 
 
 
                     if log_entrada not in verificadorLogin_v and password_entrada not in verificadorSenha_v: #teste validade login
@@ -107,7 +108,7 @@ def acessoMenuPrincipal():
 
                                 #-----   [   Inicio - Opção 3 - Pesquisa contato   ]      ----#
                                 elif optionSecundario == 3:# ainda em processo
-                                        
+                                        novaAgenda = log_entrada + '.csv'
                                         tabela = pandas.read_csv(novaAgenda)
 
                                         pesquisa = str(input('Favor informar nome contato: '))
@@ -123,23 +124,24 @@ def acessoMenuPrincipal():
 
                                 #-----  [   Inicio - Opção 4 - excluir contato    ]      -----#
                                 elif optionSecundario == 4:
-                                        
-                                        data = pandas.read_csv(novaAgenda)
-                                        print(data)
-                                        delete = int(input('Pesquisar contato: '))
-                                        result = data.drop(delete)
-                                        result = result
+                                        novaAgenda = log_entrada + '.csv'
+                                        arquivo_contatos = pandas.read_csv(novaAgenda)
+                                        print(arquivo_contatos)
+                                        delete = int(input('Informe a linha do contato: '))
+                                        result = arquivo_contatos.drop(delete)
+                                        result = str(result)
                                         print(result)
 
-                                        #novaAgenda = log_entrada + '.csv'
-                                        with open(novaAgenda, "w", encoding='utf-8') as dado:
-                                                dado.write(result)
+
+                                        with open(novaAgenda, "w+", encoding='utf-8') as dado:
+                                                dado.write(str(result))
                                         sleep(1)
 
                                 #-----  [   Fim - Opção 4    ]      -----#
 
                                 #-----  [   Inicio - Opção 5 - Alterar contato    ] ------#
                                 elif optionSecundario == 5:
+                                        novaAgenda = log_entrada + '.csv'
                                         data = pandas.read_csv(novaAgenda)
                                         print(data)
                                         alterar = int(input('Digite a linha do constato a ser alterado:  '))
@@ -148,28 +150,38 @@ def acessoMenuPrincipal():
                                         data['Nome'][alterar] = nome
                                         data['Numero'][alterar] = numero
                                         print(data)
-                                        altrado = dado
+                                        alterado = data
 
                                         with open(novaAgenda, "w", encoding='utf-8') as dado:
-                                                dado.write(altrado)
+                                                dado.write(str(alterado))
                                         sleep(1)
                                 #-----  [    Fim - Opção 5   ]      -----#
 
-                                #-----  [    Inicio - Opção 6  - Excluir Conta ]      -----#
+                                #-----  [    Inicio - Opção 6  - Excluir Conta ] ok     -----#
                                 elif optionSecundario == 6:
 
-                                        tabela = pandas.read_csv('tabelabd.csv')
+                                        print('Deseja excluir sua conta?')
+                                        print('Sim s/n Não')
+                                        pergunta = str(input('Opção: ')).lower()
 
-                                        tabela2 = pandas.DataFrame(tabela)
+                                        if pergunta == 'n':
+                                                break
+                                        elif pergunta == 's':
+                                                novoL = int(log_entrada)
+                                                tabela = pandas.read_csv('cadastroraiz.csv')
+                                                tabela2 = pandas.DataFrame(tabela)
 
-                                        itemExcluir = tabela2.index[(tabela2['Login'] == novaAgenda)].tolist()
-                                        sepandoItens = itemExcluir[0]
-                                        excluindoConta = tabela2.drop(sepandoItens)
-                                        excluindoConta = excluindoConta
-                                        print(excluindoConta)
+                                                itemExcluir = tabela2.index[(tabela2['Login'] == novoL)].tolist()
+
+                                                excluindoConta = tabela2.drop(itemExcluir)
+                                                excluindoConta = excluindoConta
+                                                print(excluindoConta)
+
+                                                with open('cadastroraiz.csv', "w", encoding='utf-8') as dado:
+                                                        dado.write(str(excluindoConta))
                                 #-----  [    Fim - Opção 6   ]      -----#
 
-                                #-----  [    Inicio - Opção 7 - Sair   ]      -----#
+                                #-----  [    Inicio - Opção 7 - Sair   ]ok      -----#
                                 elif optionSecundario == 7:
                                         break
                                 #-----  [    Fim - Opção 7   ]      -----#

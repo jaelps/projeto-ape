@@ -1,8 +1,11 @@
 import pandas
 import os
-#import menu2
-#from login import login_agenda
 from login_menuP import acessoMenuPrincipal
+
+
+desenvolvedor = 'jaelson pereira' / 'Luan Rawlison'
+
+
 #------   Guia de alteração de arquivo txt    -----------#
 
 # 'r' leitura
@@ -32,6 +35,7 @@ while optionInicio != '3' or optionInicio == 'exit':
 
                 if optionInicio == '1':
                         acessoMenuPrincipal()
+                        
 
                                 
                 #----------------------- Inicio =  Opção 2 ---------------------------#       
@@ -72,12 +76,13 @@ while optionInicio != '3' or optionInicio == 'exit':
                                 
 
                                 
-                                tabela = pandas.read_csv('tabelabd.csv')  # abertura de arquivo para leitura conforme o guia 
+                                tabela = pandas.read_csv('cadastroraiz.csv', sep=',')  # abertura de arquivo para leitura conforme o guia 
                                         
 
                                 verificadorLogin_v =  str(tabela['Login'])
                                 verificadorSenha_v = str(tabela['Senha'])
                                 verificadorNome_v = str(tabela['Nome'])
+
 
 
                                 if log in verificadorLogin_v:  #Teste para existencia de dados do banco de dados
@@ -87,7 +92,7 @@ while optionInicio != '3' or optionInicio == 'exit':
 
                                         novo_perfil = (f'\n{client},{log},{password}') # Estrutura de entrada de dados
 
-                                        with open('tabelabd.csv', "a") as dadoEntrada:
+                                        with open('cadastroraiz.csv', "a") as dadoEntrada:
                                                 dadoEntrada.write(novo_perfil)
 
                                         
